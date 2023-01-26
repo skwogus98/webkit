@@ -6,9 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        #calc{
+            width: 400px;
+            margin: 40px;
+        }
         #calc button{
-            width: 50px;
-            height: 40px;
+            width: 100%;
+            height: 100%;
+        }
+        #calc input{
+            width: 100%;
+            height: 5rem;
+            font-size: 4rem;
+            text-align: right;
+            margin-bottom: 0.5rem;
+        }
+        #result{
+            box-sizing: border-box;
+        }
+        #calc td{
+            width: 25%;
         }
     </style>
 </head>
@@ -17,11 +34,106 @@
     <!-- 계산기 버튼 만들기 -->
     <!-- 0~9 사칙연산, = 16개 버튼 -->
     <div id="calc">
-        
+        <input id="result" type="text" value="0">
+        <table cellpadding="2" cellspacing="0" width="100%" height="430px">
+            <tr>
+                <td><button name="10">+</button></td>
+                <td><button name="11">-</button></td>
+                <td><button name="12">*</button></td>
+                <td><button name="13">/</button></td>
+            </tr>
+            <tr>
+                <td><button name="7">7</button></td>
+                <td><button name="8">8</button></td>
+                <td><button name="9">9</button></td>
+                <td rowspan="4"><button name="14"> = </button> </td>
+            </tr>
+            <tr>
+                <td><button name="4">4</button></td>
+                <td><button name="5">5</button></td>
+                <td><button name="6">6</button></td>
+            </tr>
+            <tr>
+                <td><button name="1">1</button></td>
+                <td><button name="2">2</button></td>
+                <td><button name="3">3</button></td>
+            </tr>
+            <tr>
+                <td><button name="15">+/-</button></td>
+                <td colspan="2"><button name="0">0</button></td>
+            </th>
+        </table>
     </div>
 
     <script>
-        // createElement 
+        //+: 10, -: 11, *: 12, /: 13, =: 14, +-: 15
+        var result = document.getElementById("result")
+        var num1 = 0;//이전 결과값 기억
+        var op = 10;//가장 마지막에 사용된 연산자 기억
+        var clear = true
+        function btnClick(btn){
+            if(btn<10){
+                if(clear){
+                    result.value = ""
+                }
+                result.value = result.value + btn
+                clear=false
+            }
+            else if(btn==14){
+                showResult()
+                clear = true
+                num1 = 0
+                op = 10
+            }
+            else if(btn==15){
+                if(clear){
+                    result.value = ""
+                }
+                result.value = result.value * (-1)
+                clear=false
+            }
+            else{
+                showResult()
+                num1 = result.value
+                op = btn
+                clear = true
+            }
+        }
+        function showResult(){
+            console.log(num1)
+            if(op==10){
+                console.log(num1)
+                result.value = Number(result.value) + Number(num1)
+                num1 = result.value
+            }
+            else if(op==11){
+                result.value = Number(num1) - Number(result.value)
+                num1 = result.value
+            }
+            else if(op==12){
+                result.value = Number(result.value) * Number(num1)
+                num1 = result.value
+            }
+            else if(op==13){
+                if(result.value==0){
+                    alert("divide 0 err")
+                    num1 = 0
+                    op = 10
+                    clear = true
+                    return
+                }
+                result.value = Number(num1) / Number(result.value)
+                num1 = result.value
+            }
+        }
+
+        var calc = document.getElementById("calc")
+        var btns = calc.getElementsByTagName("button")
+        for (btn of btns){
+            btn.onclick = function(event){
+                btnClick(event.target.name)
+            }
+        }
     </script>
 </body>
 </html>
