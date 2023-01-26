@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>폼태그 연습</legend>
+        <form action="">
+            <!-- for에 id 적으면 label 클릭시 해당 input으로 이동 -->
+            <label for="user_name">name</label>
+            <input type="text" name="user_name" id="user_name">
+            <hr/>
+            성별:
+            <input type="radio" name="gender" value="man">남
+            <input type="radio" name="gender" value="woman">여
+            <hr/>
+            취미:
+            <input type="checkbox" name="hobby" value="code">code
+            <input type="checkbox" name="hobby" value="program">program
+            <input type="checkbox" name="hobby" value="개발">개발
+            <input type="checkbox" name="hobby" value="기획">기획
+            <hr/>
+            <select name="사는곳" id="사는곳">
+                <option value="서울">서울</option>
+                <option value="대구" selected>대구</option>
+                <option value="부산">부산</option>
+                <option value="포항">포항</option>
+                <option value="광주">광주</option>
+            </select>
+            <hr>
+            <input type="email">
+            <hr>
+            <input type="submit">
+        </form>
+    </fieldset>
+</body>
+</html>

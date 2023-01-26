@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btnDiv{
+            width: 300px;
+        }
+        #btnDiv button{
+            width: 80px;
+            margin: 10px;
+            justify-content: center;
+        }
+        #box{
+            border: 2px solid red;
+            background-color: yellow;
+            color: red;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transition-duration: 1s;
+            left: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="btnDiv">
+        <button>0, 0</button>
+        <button>200, 0</button>
+        <button>0, 200</button>
+        <button>200, 200</button>
+    </div>
+    <div id="box">
+        box
+    </div>
+
+    <script>
+        let btnDiv = document.getElementById("btnDiv")
+        let btns = btnDiv.getElementsByTagName("button")
+        let box = document.getElementById("box")
+        for (let btn of btns){
+            let pos = btn.innerText.split(", ")
+            btn.onclick = () => {
+                box.style.left = pos[0]+"px"
+                box.style.top = pos[1]+"px"
+            }
+        }
+    </script>
+</body>
+</html>

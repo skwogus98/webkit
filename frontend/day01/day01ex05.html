@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border: 2px solid red;
+            position: relative;
+            left: 0px;
+            
+            transition-duration: 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <button id="playBtn">play</button>
+    <div style="width: 400px;height: 400px;">
+        <div id="box">box</div>
+    </div>
+
+    <script>
+        let poss = [[0,0], [200,0], [0,200], [200, 200]]
+        var box = document.getElementById("box")
+        for (let pos of poss) {
+            let button = document.createElement("button");
+            button.innerText = pos[0] + ", " + pos[1];
+            button.onclick = () =>{
+                box.style.left = pos[0]+"px"
+                box.style.top = pos[1]+"px"
+                console.log(pos[0])
+            }
+            document.body.appendChild(button);
+        }
+    </script>
+</body>
+</html>
