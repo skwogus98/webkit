@@ -134,6 +134,33 @@
                 btnClick(event.target.name)
             }
         }
+
+        var body = document
+        body.onkeypress = (event) =>{
+            var btn
+            if(event.key>=0 && event.key<10){
+                btn = event.key
+            }
+            else if(event.key == "+"){
+                btn = 10
+            }
+            else if(event.key=="-") {
+                btn = 11
+            }
+            else if(event.key == "*"){
+                btn = 12
+            }
+            else if(event.key == "/"){
+                btn = 13
+            }
+            else if(event.key == "=" || event.key == "Enter"){
+                btn = 14
+            }
+            else{
+                return
+            }
+            btnClick(btn)
+        }
     </script>
 </body>
 </html>
