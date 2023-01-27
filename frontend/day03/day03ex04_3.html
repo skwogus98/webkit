@@ -13,7 +13,7 @@
 <!-- inline > internal > external -->
 <body>
     <div class="container">
-        <h1 style="background-color:red; color: yellow;"><a href="/frontend/day03/day03ex04_2.html">사원 목록</a></h1>
+        <h1 style="background-color:red; color: yellow;"><a href="/frontend/day03/day03ex04_3.html">사원 목록</a></h1>
         <p>검색 <input type="text" id="keyword"> <button id="searchBtn">검색</button></p>
         <table class="table table-bordered table-hover">
             <thead>
@@ -69,6 +69,27 @@
             "dept":"기획부",
             "position":"과장"
         },
+        {
+            "no":4,
+            "img":"https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=",
+            "name":"홍길자",
+            "dept":"관리부",
+            "position":"부장"
+        },
+        {
+            "no":5,
+            "img":"https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=",
+            "name":"김민호",
+            "dept":"생산부",
+            "position":"사원"
+        },
+        {
+            "no":6,
+            "img":"https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=",
+            "name":"박민수",
+            "dept":"영업부",
+            "position":"대리"
+        }
         ]
         function showList(list){
             if(list.length == 0){
@@ -90,13 +111,23 @@
                 document.querySelector("#rows_area").innerHTML += tmpData
             }
         }
-
+        // 검색 기능 (의사코드)
+        // searchBtn 클릭하면 keyword 가져옴
+        // keyword의 값과 같은 요소를 saramList에서 찾는다.
+        // 결과 출력
         document.querySelector("#searchBtn").onclick = () =>{
             let keyword = document.querySelector("#keyword").value
             let searchList = []
-            for(saram of saramList){
-                if((saram.name == keyword) ||(saram.dept == keyword) || (saram.position == keyword)){
-                    searchList.push(saram)
+            for(let saram of saramList){
+                //if((saram.name == keyword) ||(saram.dept == keyword) || (saram.position == keyword)){
+                //    searchList.push(saram)
+                //}
+                for(temp in saram){
+                    //console.log(saram[temp].toString())
+                    if(saram[temp].toString().indexOf(keyword) != -1){
+                        searchList.push(saram)
+                        break;
+                    }
                 }
             }
             showList(searchList)
