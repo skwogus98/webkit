@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.middle div{
+            border: 1px solid orange;
+            padding: 5px;
+            margin: 2px;
+        }
+        div.middle > div:nth-child(2){
+            width: 400px;
+            background-color: black;
+        }
+        div.middle div.center{
+            width: 400px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="middle">
+        <div class="left">
+
+        </div>
+        <div class="center">
+            <div class="banner">
+                banner
+            </div>
+            <div class="content">
+                content
+            </div>
+            <div class="content">
+                content
+            </div>
+        </div>
+        <div class="right">
+
+        </div>
+    </div>
+</body>
+</html>
