@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #lists{
+            border: 1px solid black;
+            position: relative;
+            width: 1000px;
+            padding: 0px;
+            box-sizing: border-box;
+            left: 0%;
+            transition: .5s;
+        }
+        .list{
+            border: 1px solid aquamarine;
+            display: inline-block;
+            width: calc(100%/12);
+            text-align: center;
+            box-sizing: border-box;
+        }
+        #slider{
+            display: flex;
+            height: 60px;
+        }
+        #slider>*{
+            height: 100%;
+        }
+        #slider>button{
+            width: 40px;
+        }
+        #box{
+            width: 500px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h1>길동이의 코딩교실</h1>
+    <hr>
+    <div id="slider">
+        <div>
+            <button id="leftBtn">
+                left
+            </button>
+        </div>
+        <div id="box">
+            <ul id="lists">
+
+            </ul>
+        </div>
+        <div>
+            <button id="rightBtn">
+                right
+            </button>
+        </div>
+    </div>
+
+    <script>
+        var itemNames = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6','item7', 'item8', 'item9', 'item10', 'item11', 'item12']
+        var slider = document.getElementById("slider")
+        var lists = document.getElementById("lists")
+        var leftBtn = document.getElementById("leftBtn")
+        var rightBtn = document.getElementById("rightBtn")
+        var cnt = 0;
+        itemNames.forEach((value, index) =>{
+            let li = document.createElement("li")
+            li.innerHTML = value
+            li.className = "list"
+            lists.appendChild(li)
+        })
+        leftBtn.onclick = () =>{
+            cnt<0 ? cnt++: cnt;
+            lists.style.left = (cnt*100/6)+"%"
+            console.log(cnt)
+        }
+        rightBtn.onclick = () =>{
+            cnt> -6 ? cnt-- : cnt;
+            lists.style.left = (cnt*100/6)+"%"
+            console.log(cnt)
+        }
+    </script>
+</body>
+</html>
