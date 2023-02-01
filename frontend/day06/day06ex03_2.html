@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            border: 1px black solid;
+            /*border-radius: 7px;*/
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        body{
+            overflow: auto;
+        }
+        .container div{
+            padding: 10px;
+        }
+        .header ul{
+            height: 40px;
+            overflow: hidden;
+        }
+        .header nav li{
+            float: left;
+            width: 25%;
+            height: 40px;
+            list-style: none;
+        }
+        .header nav li:hover{
+            background-color: azure;
+        }
+        .middle{
+            height: 400px;
+        }
+        .middle>div{
+            width: 25%;
+            float: left;
+        }
+        .middle div{
+            height: 100%;
+        }
+        .middle .center{
+            width: 50%;
+        }
+        .sidebar div{
+            height: auto;
+        }
+        .center div{
+            width: 100%;
+            height: 25%;
+        }
+        .footer{
+            height: 100px;
+        }
+        @media (max-width:960px){
+            body{
+                background-color: aliceblue;
+            }
+            .middle div{
+                width: 100%;
+                height: fit-content;
+            }
+            .middle .center{
+                width: 100%;
+                height: fit-content;
+            }
+            .middle{
+                height: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>Welcome to My Homepage</p>
+            <p>use the menu to select iffernt Stylesheets</p>
+        </div>
+        <div class="middle">
+            <div class="left">
+                <ul>
+                    <li>Stylesheet 1</li>
+                    <li>Stylesheet 2</li>
+                    <li>Stylesheet 3</li>
+                    <li>Stylesheet 4</li>
+                    <li>No Stylesheet</li>
+                </ul>
+            </div>
+            <div class="center">
+                <div class="content">
+                    Same Page Different Stylesheets
+                </div>
+                <div class="content">
+                    tbd
+                </div>
+                <div class="content">
+                    No Styles
+                </div>
+                <div class="content">
+                    tbd
+                </div>
+            </div>
+            <div class="right">
+                <div class="sidebar">
+                    <div>
+                        Side-bar
+                    </div>
+                    <div>
+                        tbd
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            footer
+        </div>
+    </div>
+</body>
+</html>
