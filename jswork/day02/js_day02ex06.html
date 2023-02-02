@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //클래스 식별자는 대문자로 시작
+        function People(){
+            this.name = "홍"
+            //외부에서 this를 변수에 저장한 뒤 내부에서 선언한 변수를 가져온다.
+            this.move = function(){
+                console.log(this)
+                var cnt = 0
+                var ref = setInterval(()=>{ //arrow function을 사용할때는 객체가 출력이 됨
+                    console.log(this.name)
+                    cnt++
+                    if(cnt==3){
+                        clearInterval(ref);
+                    }
+                }, 500)
+            }
+        }
+        var p = new People()
+        p.move()
+    </script>
+</body>
+</html>
