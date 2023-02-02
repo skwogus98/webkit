@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#gameBox{
+            border: 1px solid orange;
+            width: 330px;
+            height: 330px;
+        }
+        div#gameBox ul{
+            margin: 0;
+            padding: 0;
+            float: left;
+        }
+        div#gameBox li{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>햄버거 하우스 게임</h1>
+    <div id="gameBox"></div>
+
+    <script>
+        function MkUl(gameBox){
+            console.log(this)
+            var ul = document.createElement("ul")
+            this.init = ()=>{
+                var li = document.createElement("li")
+                li.innerText = "1"
+                ul.appendChild(li)
+                gameBox.appendChild(ul);
+
+            }
+            this.play = ()=>{
+                console.log(ul)
+            }
+        }
+        var gameBox = document.getElementById("gameBox")
+        new MkUl(gameBox).init();
+        new MkUl(gameBox).play();
+    </script>
+</body>
+</html>

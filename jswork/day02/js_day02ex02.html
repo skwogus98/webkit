@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var cnt = 0;
+        //var은 범위가 함수 단위 이다.
+        //is not defined
+        function addCnt(){
+            var cnt = 0;
+            cnt++;
+        }
+        addCnt()
+
+        console.log(cnt)
+    </script>
+</body>
+</html>

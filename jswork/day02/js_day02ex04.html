@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var myObj = {
+            name: "홍길동",
+            email: "hong@saram.com",
+            showInfo: function(){
+                var a = "a"//showInfo 함수 범위에서만 사용
+                let b = "b"//block안에서만 사용
+                console.log(this.name, this.email)
+                console.log(this.a, this.b) //undefined
+                console.log(window)//window에도 a,b는 존재 x
+            }
+        }
+
+        myObj['showInfo']();
+        console.dir(this)
+    </script>
+</body>
+</html>

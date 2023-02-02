@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var cnt = 0;
+        var ref = setInterval(()=>{
+            console.log(this)//window, function을 사용해도 window
+            //일정 tick마다 핸들러의 함수를 실행
+            cnt += 2
+            console.log(cnt)
+            if(cnt==10){
+                clearInterval(ref)//종료
+            }
+        }, 500)
+    </script>
+</body>
+</html>
