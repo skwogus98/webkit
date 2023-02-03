@@ -24,12 +24,18 @@
             border: 1px solid black;
             list-style: none;
             box-sizing: border-box;
+            text-align: center;
+            line-height: 96px;
         }
     </style>
 </head>
 <body>
     <h1>햄버거 하우스 게임</h1>
     <div class="gameBox"></div>
+    <div class="gameBox"></div>
+    <div class="gameBox"></div>
+
+    <button id="playBtn">play</button>
 
     <script>
         function MakeUl(gameBox) {
@@ -43,10 +49,15 @@
                 gameBox.appendChild(this.ulTag);
 
                 // 게임 실행
-                this.play();
+                //this.play();
+
+                return this;
             }
+            
+            this.isPlay = 0
 
             this.play = function() {
+                this.isPlay = 0
                 this.ulTag.style.position = "relative";
                 var y = 0;
                 var stop = Math.abs(Math.floor(Math.random()*5 ) );
@@ -62,16 +73,16 @@
                             y = 0;
                             this.ulTag.style.top = y + "px";
                             var setNumInterval = setInterval(()=>{
-                                console.log(y)
-                                y -= 9.8;
-                                //소수점 단위 연산을 하여 2진수의 소수점 연산의 오차 때문에 값이 예측값보다 0.00000001정도 크게 나오기 때문에 +1을 하여 보정해 주었다.
                                 if(y <= -num+1) { 
                                     this.ulTag.style.top = y + "px";
                                     clearTimeout(setNumInterval);
                                 }
                                 this.ulTag.style.top = y + "px";
+                                y -= 9.8;
+                                //소수점 단위 연산을 하여 2진수의 소수점 연산의 오차 때문에 값이 예측값보다 0.00000001정도 크게 나오기 때문에 +1을 하여 보정해 주었다.
                             },10)
                             clearTimeout(refInterval);
+                            this.isPlay = 1;
                         }
                         cnt++;
                     }
@@ -81,10 +92,27 @@
             }
         }
 
-        var gameBox = document.querySelector(".gameBox");
-        new MakeUl(gameBox).init();
-        new MakeUl(gameBox).init();
-        new MakeUl(gameBox).init();
+        var gameBox = document.querySelectorAll(".gameBox");
+        var makeUls = []
+        
+        for(var i=0; i<3; i++){
+            for(var j=0; j<3; j++){
+                makeUls.push(new MakeUl(gameBox[i]).init());
+            }
+        }
+        var playBtn = document.querySelector("#playBtn")
+        playBtn.onclick = ()=>{
+            makeUls.forEach((ul, key) => {
+                ul.play()
+            })
+            var chkBingo = setInterval(()=>{
+                let cnt = 0
+                makeUls.forEach((ul, key) => {
+                    cnt += ul.isPlay
+                })
+                console.log(cnt);
+            },100)
+        }
     </script>
 </body>
 </html>
