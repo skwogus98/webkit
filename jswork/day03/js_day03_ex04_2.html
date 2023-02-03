@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #lottoArea >li{
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            list-style-type: none;
+            float: left;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>로또 번호 생성기</h1>
+    <fieldset>
+        <legend>Lotto</legend>
+        <ul id="lottoArea">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </fieldset>
+    <button onclick="generate()">Generate</button>
+
+    <script>
+        const colors = ['red', 'green', 'orange', 'yellow', 'skyblue', "pink"]
+        const balls = document.querySelectorAll("#lottoArea li")
+        function generate(){
+            let arr = Array.from(Array(46).keys())
+            arr.splice(0,1)
+            balls.forEach((element, key) =>{
+                element.style.backgroundColor = colors[key];
+                element.innerHTML = arr.splice(Math.random()*(arr.length), 1)
+            })
+        }
+    </script>
+</body>
+</html>
