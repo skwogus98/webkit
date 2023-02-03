@@ -8,8 +8,8 @@
     <style>
         div.gameBox {
             border: 1px solid orange;
-            width : 308px;
-            height: 108px;
+            width : 300px;
+            height: 100px;
             overflow: hidden;
         }
         div.gameBox ul {
@@ -18,10 +18,12 @@
             float: left;
         }
         div.gameBox li {
-            width: 100px;
-            height: 100px;
+            margin: 2px;
+            width: 96px;
+            height: 96px;
             border: 1px solid black;
             list-style: none;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -48,20 +50,34 @@
                 this.ulTag.style.position = "relative";
                 var y = 0;
                 var stop = Math.abs(Math.floor(Math.random()*5 ) );
+                var num = Math.abs(Math.floor(Math.random()*10 ) )*98;
                 console.log("그만");
                 var cnt = 0;
                 var refInterval = setInterval(() => {
-                    y -= 10;
-                    if(y <= -1000) {
+                    y -= 9.8;//비율 변경으로 인해 980을 단위로 사용
+                    if(y <= -980) {
                         y = 0;
-                        console.log(cnt, stop);
+                        //console.log(cnt, stop);
                         if(cnt >= stop) {
+                            y = 0;
+                            this.ulTag.style.top = y + "px";
+                            var setNumInterval = setInterval(()=>{
+                                console.log(y)
+                                y -= 9.8;
+                                //소수점 단위 연산을 하여 2진수의 소수점 연산의 오차 때문에 값이 예측값보다 0.00000001정도 크게 나오기 때문에 +1을 하여 보정해 주었다.
+                                if(y <= -num+1) { 
+                                    this.ulTag.style.top = y + "px";
+                                    clearTimeout(setNumInterval);
+                                }
+                                this.ulTag.style.top = y + "px";
+                            },10)
                             clearTimeout(refInterval);
                         }
                         cnt++;
                     }
                     this.ulTag.style.top = y + "px";
                 }, 10);
+                y = 0;
             }
         }
 
