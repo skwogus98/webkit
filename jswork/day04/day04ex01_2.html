@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#box{
+            border: 1px solid red;
+            background-color: yellow;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            z-index: 1;
+        }
+        div#targetBox{
+            border: 1px solid black;
+            background-color: bisque;
+            width: 150px;
+            height: 200px;
+            position: absolute;
+            left: 400px;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <h1>길동이의 코딩교실</h1>
+    <hr>
+    <div id="box">
+        box
+    </div>
+    <div id="targetBox">
+        target
+    </div>
+
+    <script>
+        var box = document.getElementById("box")
+        var targetBox = document.getElementById("targetBox")
+        box.onmousedown = function(e){
+            box.style.position="absolute"
+            const firstX = e.target.style.left
+            const firstY = e.target.style.top
+            var targetX = parseInt(getComputedStyle(e.target).getPropertyValue("left"))
+            var targetY = parseInt(getComputedStyle(e.target).getPropertyValue("top"))
+            var x = e.clientX
+            var y = e.clientY
+            var gapX = targetX-x;
+            var gapY = targetY-y;
+            
+            var drag = function(event){
+                e.target.style.left = event.clientX + gapX +"px"
+                e.target.style.top = event.clientY + gapY +"px"
+            }
+            box.addEventListener("mousemove", drag)
+                
+            document.addEventListener("mouseup", (event)=> {
+                var upX = event.clientX
+                var upY = event.clientY
+                var onTargetBox = (parseInt(getComputedStyle(targetBox).left) <= upX)
+                && (upX <= parseInt(getComputedStyle(targetBox).left) + parseInt(getComputedStyle(targetBox).width))
+                && (parseInt(getComputedStyle(targetBox).top) <= upY)
+                && (upY <= parseInt(getComputedStyle(targetBox).top) + parseInt(getComputedStyle(targetBox).height));
+
+                if(onTargetBox){
+                }
+                else{
+                    box.style.left = firstX
+                    box.style.top = firstY
+                }
+                box.removeEventListener("mousemove", drag)
+            })
+        }
+        
+    </script>
+</body>
+</html>
