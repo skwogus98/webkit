@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = ()=>{
+            document.getElementById("ajaxButton").onclick = loadDoc
+        }
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "/js/saram_data.json", true);
+            xhttp.responseType = 'json'
+            xhttp.onload = function() {
+                //document.getElementById("demo").innerHTML = this.responseText;
+                putData(this.response.saramList)
+            }
+            xhttp.send();
+        }
+        function putData(saramData){
+            var saramTable = document.querySelector("#saramTable")
+            for(let data in saramData[0]){
+                let th = document.createElement("th")
+                th.innerHTML = data
+                saramTable.appendChild(th)
+            }
+            for(let data of saramData){
+                var saramTr = document.createElement("tr")
+                //console.log(data)
+                for(let li in data){
+                    let td = document.createElement("td")
+                    td.innerHTML = data[li]
+                    saramTr.appendChild(td)
+                }
+                saramTable.appendChild(saramTr)
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="demo">
+        <table id="saramTable">
+        </table>
+    </div>
+    <button id="ajaxButton">
+        ajax
+    </button>
+</body>
+</html>
