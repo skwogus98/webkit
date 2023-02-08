@@ -15,7 +15,7 @@ var saramList = {
       {"no":4, "name":"c", "email":"email", "phone":"010-1234-5678"},
       {"no":5, "name":"d", "email":"email", "phone":"010-1234-5678"},
       {"no":6, "name":"e", "email":"email", "phone":"010-1234-5678"},
-      {"no":10, "name":"e", "email":"email", "phone":"010-1234-5678"},
+      {"no":7, "name":"e", "email":"email", "phone":"010-1234-5678"},
   ]
 }
 
@@ -52,6 +52,12 @@ app.get("/saram/list", (req, res) =>{
 
 app.get("/saram/add", (req, res) =>{
   console.log(req.query)
+  saramList.saramList.push({
+    "no":saramList.saramList.length, 
+    "name": req.query.name, 
+    "email":req.query.email, 
+    "phone":req.query.phone
+  })
   res.json(saramList)
 })
 
