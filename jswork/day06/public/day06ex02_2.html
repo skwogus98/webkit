@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script>
+        //$(document).ready(()=>{
+        //    console.log("hi")
+        //})
+
+        $(()=>{ 
+            $("#btns > button").click(function(event){
+                console.log($(this))
+                $("body").css("backgroundColor", $(this).text())
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="btns">
+        <button id="redBtn">red</button>
+        <button id="greenBtn">green</button>
+        <button id="blueBtn">blue</button>
+    </div>
+</body>
+</html>
