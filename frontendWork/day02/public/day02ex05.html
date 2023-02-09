@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <h1>hello world</h1>
+    </div>
+    <div>
+        <button id="loadBtn">Load</button>
+        <button id="getBtn">get</button>
+        <button id="postBtn">post</button>
+    </div>
+    <!-- jQuery ajax: load(), get(), post(), ajax(), getJson() -->
+    <script>
+        $(document).ready(()=>{
+            //laod = ajax + innerHTML
+            $("#loadBtn").click((event)=>{
+                $("#demo").load("load_data.txt", (a,b,c)=>{
+                    console.log(a)//a = response
+                    console.log(b)//b = status
+                    console.log(c)//c = xhr
+                });
+            })
+            $("#getBtn").click((event)=>{
+                $.ajax({
+                    url:"/saram",
+                    data:"hello",
+                    method:"get",
+                }).done((res)=>{
+                    console.log(res)
+                })
+            })
+            $("#postBtn").click((event)=>{
+                $.ajax({
+                    url:"/car",
+                    data:{no:10, name:"sonata", price: 20000, company:"company"},
+                    method:"post",
+                    type:"json"
+                }).done((res)=>{
+                    console.log(res)
+                })
+            })
+        })
+    </script>
+</body>
+</html>

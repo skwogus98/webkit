@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
+</head>
+<body>
+    <h1>cars</h1>
+    <form id="carForm">
+        <table>
+            <caption>정보 입력</caption>
+            <tr>
+                <th>차종</th>
+                <td><input type="text" name="name" value="k5"></td>
+            </tr>
+            <tr>
+                <th>가격</th>
+                <td><input type="text" name="price" value="4500"></td>
+            </tr>
+            <tr>
+                <th>회사</th>
+                <td><input type="text" name="company" value="kia"></td>
+            </tr>
+            <tr>
+                <th>연식</th>
+                <td><input type="text" name="year" value="2022"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" name="" value="저장"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="carListBox"></div>
+    <script type="text/html" id="carTable">
+        <table style="width:100%;text-align:center">
+            <tr>
+                <th>no</th>
+                <th>name</th>
+                <th>price</th>
+                <th>company</th>
+                <th>year</th>
+                <th>fix</th>
+                <th>del</th>
+            </tr>
+            <%
+            for(var car of carList) {
+            %>
+            <tr>
+                <td><%=car.no %></td>
+                <td><%=car.name %></td>
+                <td><%=car.price %></td>
+                <td><%=car.company %></td>
+                <td><%=car.year %></td>
+                <td><button class="fixBtn" data-no="<%=car.no %>">x</button></td>
+                <td><button class="delBtn" data-no="<%=car.no %>">x</button></td>
+            </tr>
+            <% } %>
+        </table>
+    </script>
+
+    <script>
+        function getCarList(data){
+                var carList = data
+                
+                var compile = _.template($("#carTable").html())
+                var html = compile({carList})
+                $("#carListBox").html(html)
+                //console.log($("#carListBox").html())
+                $("button.delBtn").click((event)=>{
+                    //console.log($(event.target).data("no"))
+                    $.get("/car/delete",{"no":$(event.target).data("no")},(data, status, xhr)=>{
+                        getCarList(data)
+                    })
+                })
+                $("button.fixBtn").click((event)=>{
+                    let data = {
+                        "no": $(event.target).data("no"),
+                        "name" : $("#carForm"), 
+                        "price" : $("#carForm").price, 
+                        "company" : $("#carForm").company,
+                        "year" : $("#carForm").year
+                    }
+                    console.log(data)
+                    console.log($(event.target).data("no"))
+                    $.get("/car/fix",{"no":$(event.target).data("no")},(data, status, xhr)=>{
+                        getCarList(data)
+                    })
+                })
+        }
+
+        $(document).ready(()=>{
+            $.get("/car", function(data, status, xhr){
+                if(status=="success"){
+                    getCarList(data)
+                }
+            })
+            $("#carForm").submit((event)=>{
+                event.preventDefault()
+                //console.log(event.target.name.value)
+                let data = {
+                    "no": 0,
+                    "name" : event.target.name.value, 
+                    "price" : event.target.price.value, 
+                    "company" : event.target.company.value,
+                    "year" : event.target.year.value
+                }
+                console.log(data)
+                $.post("/car", data, (res)=>{
+                    console.log(res)
+                    getCarList(res)
+                })
+            })
+        })
+    </script>
+</body>
+</html>
