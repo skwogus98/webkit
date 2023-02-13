@@ -4,13 +4,16 @@ const app = express();
 const cors = require("cors");
 const formidable = require("formidable");
 const fs = require("fs");
+const axios = require("axios")
+const cheerio = require("cheerio")
+const iconv = require("iconv-lite")
 
 // app.set("key", "value")  - setAttribute 용도로 사용
 // app.get("key");  - getAttribute의 용도로 사용
 // app.get("path", 콜백함수)  - 서버의 doGet 역할
 // app.post("path", 콜백함수)  - 서버의 doPost 역할
 
-app.set("port", 3000);
+app.set("port", 8000);
 
 app.use(express.static("public"));
 
@@ -106,4 +109,16 @@ app.post("/saram/input", (req, res) => {
       });
     }
   });
+});
+
+app.get("/cheerIo", (req, res) => {
+  console.log("GET - /cheerio");
+  axios.get("https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=105").then((response) => {
+      res.send(response.data)
+      let htmlCMD = iconv.decode(response.data, "EUC-KR").toString()
+      const $ = cheerio.load(htmlCMD)
+      let cluster = $("div.list_body div.cluster a")
+      console.log(cluster.html())
+      res.end()
+    });
 });
