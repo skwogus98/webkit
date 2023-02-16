@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import "./App.css";
+import "./App.css";
 
 function ItemRow({item, removeList, check}) {
   //console.log(item.title)
@@ -11,7 +11,7 @@ function ItemRow({item, removeList, check}) {
     <li>
       <p>
         <input type="checkbox" checked={item.done} onChange={(e)=>{check(item.no)}}/>
-        <input type="text" value={item.title} disabled />
+        <input type="text" value={item.title} disabled className={item.done ? 'done' : 'undone'}/>
         <button onClick={rmBtn}>삭제</button>
       </p>
     </li>
@@ -63,7 +63,7 @@ function App(props) {
   function removeList(no){
     console.log(no)
     setTodoList(todoList.filter((todo)=>{
-      return todo.no != no;
+      return todo.no !== no;
     }))
   }
 
