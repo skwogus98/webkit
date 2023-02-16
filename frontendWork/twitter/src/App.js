@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <div className=''>
-        <div id='content' className='flex items-center justify-between mx-auto max-w-7xl px-4'>
+        <div id='content' className='flex justify-between mx-auto max-w-7xl px-4'>
           <Nav/>
           <Main/>
           <Footer/>

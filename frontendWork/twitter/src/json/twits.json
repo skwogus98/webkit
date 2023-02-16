@@ -1,0 +1,4 @@
+[
+    {"id":"id1", "nickname":"nickname1", "content":"내용임", "liked":true},
+    {"id":"id2", "nickname":"nickname2", "content":"내용임1", "liked":false}
+]

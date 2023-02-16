@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할 일 목록</title>
+</head>
+<body>
+    <h1>할 일 목록</h1>
+    <div>
+        <form action="/todoList" method="post">
+            <input type="text" value="새 할일" name="newItem">
+            <input type="submit" value="저장">
+        </form>
+    </div>
+    <table width="100%">
+        <tr>
+            <th width="10%">번호</th>
+            <th width="10%">체크</th>
+            <th width="60%">할일</th>
+            <th width="10%">삭제</th>
+            <th width="10%">수정</th>
+        </tr>
+    <%
+        for(var todo of todoList) {
+    %>
+        <tr>
+            <td><%=todo.idx %></td>
+            <td><input type="checkbox"></td>
+            <td><%=todo.title %></td>
+            <td><button>삭제</button></td>
+            <td><button>수정</button></td>
+        </tr>
+    <%  } // end of for %>
+    </table>
+</body>
+</html>

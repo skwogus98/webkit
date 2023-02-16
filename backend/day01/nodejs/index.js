@@ -2,6 +2,8 @@ const http = require("http");
 const fs = require("fs");
 const url = require("url");
 
+
+
 const server = http.createServer((request, response)=>{
     console.dir(request.url);
     response.writeHead(200, {"Content-Type":"text/html; charset=utf8"})
