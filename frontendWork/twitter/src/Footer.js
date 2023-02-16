@@ -1,7 +1,19 @@
 import React from 'react'
+import login from './firebase/login'
 import SearchIcon from './img/search.png'
 
 function Footer() {
+  async function loginSubmit(e){
+    e.preventDefault();
+    let userData = await login(e.target.id.value, e.target.password.value);
+    console.log(userData)
+    if(userData == null){
+      alert("아이디와 비밀번호를 확인하여 주세요.")
+    }
+    else{
+      console.log(userData.nickname)
+    }
+  }
   return (
     <div className='w-1/4 min-h-screen px-2'>
         {/* searchBox */}
@@ -12,9 +24,9 @@ function Footer() {
 
         <hr></hr>
         {/* login form */}
-        <form className='p-4 pb-0'>
-          <input value="id" className='w-full bg-gray-200 my-2 p-2 rounded-xl'></input>
-          <input value="password" className='w-full bg-gray-200 my-2 p-2 rounded-xl'></input>
+        <form onSubmit={loginSubmit} className='p-4 pb-0'>
+          <input placeholder="id" name="id" className='w-full bg-gray-200 my-2 p-2 rounded-xl'></input>
+          <input placeholder="password" name="password" type="password" className='w-full bg-gray-200 my-2 p-2 rounded-xl'></input>
           <input type="submit" value="로그인" className='w-full bg-sky-300 my-2 p-2 rounded-full'></input>
         </form>
         <hr></hr>
