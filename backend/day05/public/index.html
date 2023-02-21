@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="paintCanvas" style="border:1px black solid"></canvas>
+    <script>
+        var ctx
+        var paintFnc = {
+            draw : (x, y, myPaint)=>{
+                if(myPaint){
+                    ctx.lineTo(x,y)
+                    ctx.stroke();
+                }
+            },
+            startDraw: (x, y)=>{
+                ctx.beginPath()
+                ctx.moveTo(x,y)
+            }
+        }
+        $(document).ready(()=>{
+            var canvas = document.getElementById("paintCanvas")
+            ctx = canvas.getContext("2d")
+            canvas.width = 800;
+            canvas.height = 600
+            connection();
+            
+        })
+        //내가 그리는 것
+        var myPaint = false
+        $("#paintCanvas").on("mousedown", e=>{
+            //myPaint = true
+            //paintFnc.startDraw(e.offsetX, e.offsetY)
+            socket.emit("startDraw", {x:e.offsetX, y:e.offsetY})
+        })
+        $("#paintCanvas").on("mousemove", e=>{
+            //console.dir(e.offsetX+","+ e.offsetY)
+            //paintFnc.draw(e.offsetX, e.offsetY, myPaint)
+            socket.emit("Draw", {x:e.offsetX, y:e.offsetY})
+        })
+        $("#paintCanvas").on("mouseup", e=>{
+            //myPaint = false
+            socket.emit("endDraw", true)
+        })
+
+
+        var socket = null;
+        var userId = null;
+        
+        var socketPaint = false
+
+        function connection()  {
+            socket = io.connect("http://localhost:3000");
+            socket.on("connect", function() {
+                console.log("socket server에 연결 됨.");
+
+                socket.on("socketDrawStart", (data)=>{
+                    //console.log(data.x, data.y)
+                    socketPaint = true;
+                    paintFnc.startDraw(data.x, data.y)
+                })
+                socket.on("socketDraw", (data)=>{
+                    paintFnc.draw(data.x, data.y, socketPaint)
+                })
+                socket.on("socketDrawEnd", ()=>{
+                    socketPaint = false
+                    console.log("end")
+                })
+
+                socket.on("")
+            });
+        }
+    </script>
+</body>
+</html>
